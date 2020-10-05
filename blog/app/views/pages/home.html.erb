@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+
+<div class="m-3">
+  <div class="d-flex">
+
+<% if current_user %>
+      <span> Logged In as:</span> <span class="text-capitalize"> <%= current_user.fname %> </span>
+<% end %>
+
+<% if current_user %>
+    <div class="ml-auto">
+        <span><%= link_to "New_Post",new_post_path %></span>
+        <span><%= link_to "Your Posts",posts_path(params: {user_id: current_user.id}) %></span>
+        <span><%= link_to "Sign out",destroy_user_session_path,method: :delete %></span>
+    </div>
+<% else %>
+    <div class="ml-auto">
+      <%= link_to "Sign Up", new_user_registration_path %>
+      <%= link_to "Sign In",new_user_session_path %>
+  </div>
+<% end %>
+</div>
+
+<h1>Blogs</h1>
+    <% @post =Post.all.each do |p| %>
+<div class="mb-3">
+    <div class="d-flex ">
+  <h5 class="m-0 font-weight-bold">Title:</h5> <h5 class="m-0"><%= p.title %></h5>
+</div>
+    <p class="m-0">User:  <%= p.user.fname %> </p>
+  <% if current_user %>
+      <%= link_to "Comment",post_path(p.id) %>
+  <% end %>
+</div>
+<% end %>
+<br>
+</div>
+</body>
+</html>

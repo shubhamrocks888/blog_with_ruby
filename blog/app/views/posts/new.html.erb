@@ -1,0 +1,16 @@
+<div class="d-flex">
+<span> Logged In as:</span> <span> <%= current_user.fname %> </span>
+<span class="ml-auto">
+<%= link_to "Home",root_path%>
+</span>
+</div>
+
+
+
+<h5>New Post</h5>
+
+<%= render 'form', post: @post %>
+
+<%= link_to 'Back', posts_path %>
+
+<%= link_to "Sign Out", destroy_user_session_path,method: :delete %>

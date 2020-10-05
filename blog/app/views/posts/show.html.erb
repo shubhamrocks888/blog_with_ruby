@@ -1,0 +1,28 @@
+<div class="d-flex">
+  <div>
+  <span> Logged In as:</span> <span> <%= current_user.fname %> </span>
+  </div>
+  <div class="ml-auto">
+  <%= link_to "Home",root_path%>
+  <%= link_to 'Back', posts_path %>
+  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+  </div>
+</div>
+
+<h2> Post </h2>
+<P>Title: <%= @post.title %></p>
+<p>Content: <%= @post.content %></p>
+
+<p>Created By: <%= @post.user.fname%></p>
+<div class="mb-3">
+<%if current_user and current_user.id == @post.user_id %>
+  <%= link_to 'Edit Post', edit_post_path(@post) %>
+<% end %>
+</div>
+<div class="field">
+  <h5 class="font-weight-bold">Comments:</h5>
+  <%=  render @post.comments %>
+
+</div>
+  <p> Add a Comments: </p>
+  <%=  render 'comments/form' %>
